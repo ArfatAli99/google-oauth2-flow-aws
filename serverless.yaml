@@ -1,0 +1,39 @@
+#org: Arfat Ali
+app: appstore-connect-google
+service: appstore-connect-google
+#frameworkVersion: '3'
+provider:
+  name: aws
+  runtime: nodejs16.x
+plugins:
+  - serverless-offline
+
+functions:
+  api:
+    handler: index.handler
+    # environment: ${file(env.${opt:stage, self:provider.stage}.json)}
+    events:
+      - http:
+          path: /callback
+          method: POST
+          cors:
+            origin: "*" # <-- Specify allowed origin
+            headers: "*"
+      - http:
+          path: /signInGoogle
+          method: POST
+          cors:
+            origin: "*" # <-- Specify allowed origin
+            headers: "*"
+      - http:
+          path: /redirect_from_google
+          method: GET
+          cors:
+            origin: "*" # <-- Specify allowed origin
+            headers: "*"
+      - http:
+          path: /outh-google
+          method: POST
+          cors:
+            origin: "*" # <-- Specify allowed origin
+            headers: "*"
